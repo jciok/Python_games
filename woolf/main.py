@@ -7,6 +7,9 @@ import sys
 # import settings from setins.py
 from settings import *
 
+# import map from map.py
+from map import * 
+
 #add game class
 class Game:
 
@@ -26,9 +29,12 @@ class Game:
         # create new clock object
         self.clock = pg.time.Clock()
 
-    # new game metod, empty for now
+        # cal new_game
+        self.new_game()
+
+    # new game metod, set map
     def new_game(self):
-        pass
+        self.map = Map(self)
     
     # metod of screen update, for now cdisplay number of FPS in window caption
     def update(self):
@@ -45,10 +51,13 @@ class Game:
         # podzieloną przez 1, zaokrągloną do jednego miejsca po przecinku przy użyciu f stringa -- :`.1f`.
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
 
-    # draw mmetod for now screen will be black
+    # draw mmetod for now screen will have simple map
     def draw(self):
         # wypełnij ekran na czarno
         self.screen.fill('black')
+
+        #call draw from map
+        self.map.draw()
 
     # metoda do obłsugi zdarzeń
     def check_events(self):
