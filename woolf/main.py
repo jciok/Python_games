@@ -29,6 +29,9 @@ class Game:
         # create new clock object
         self.clock = pg.time.Clock()
 
+        # delta czasu na potrzebę jednostajengo ruchu gracz
+        self.delta_time=1
+
         # cal new_game
         self.new_game()
 
@@ -43,7 +46,7 @@ class Game:
         pg.display.flip()
 
         # function that limits the program speed to get a certain number FPS 
-        self.clock.tick(FPS)
+        self.delta_time = self.clock.tick(FPS)
 
         # Funkcja set_caption() pozwala na ustawienie tytułu okna gry lub 
         # aplikacji. W tej linii kodu, funkcja ta jest wywoływana, aby ustawić 
