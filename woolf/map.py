@@ -32,7 +32,7 @@ class Map:
         self.mini_map = mini_map
 
         # tworzy pusty słownik word_map
-        self.word_map = {}
+        self.world_map = {}
 
         # wywołuje metodę get_map() dla nowo utworzonego obiektu.
         self.get_map()
@@ -46,11 +46,11 @@ class Map:
         for j, row in enumerate(self.mini_map):
             for i, value in enumerate(row):
                 if value:
-                    self.word_map[i, j] = value
+                    self.world_map[i, j] = value
 
     # function that draw world_map on screen
     def draw(self):
 
         # list comprehasion -- we drow squares for elements in world_map
         # sqares will be gray 100x100 with 2 px border
-        [pg.draw.rect(self.game.screen, 'darkgray', (pos[0]*100, pos[1]*100, 100, 100), 2) for pos in self.word_map]
+        [pg.draw.rect(self.game.screen, 'darkgray', (pos[0]*100, pos[1]*100, 100, 100), 2) for pos in self.world_map]

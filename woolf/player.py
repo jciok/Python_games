@@ -79,8 +79,7 @@ class Player:
             dx += -speed_sin
             dy += speed_cos
         
-        self.x+=dx
-        self.y+=dy
+        self.check_wall_colisoin(dx, dy)
 
         if keys[pg.K_LEFT]:
             #print("K_LEFT pressed")
@@ -89,6 +88,26 @@ class Player:
             #print("K_RIGHT pressed")
             self.angle += PLAYER_ROT_SPEED * self.game.delta_time
         self.angle %= math.tau
+
+    # metod for return true if coordinate are out of world map
+    def check_wall(self, x,y):
+        return (x,y) not in self.game.map.world_map
+
+    # metod for checking colision
+    # Metoda "check_wall_collision(dx,dy)" sprawdza, czy po przesunięciu 
+    # postaci gracza o wartość dx w osi X i dy w osi Y na mapie gry występuje 
+    # kolizja z jakimkolwiek elementem mapy. Metoda najpierw wywołuje metodę 
+    # "check_wall" dla punktu, w którym postać powinna się znaleźć po 
+    # przesunięciu. Jeśli ten punkt znajduje się poza granicami mapy, to postać 
+    # zostaje przesunięta o wartości dx lub dy, w zależności od kierunku ruchu, 
+    # który nie napotkał przeszkody. Jeśli punkt znajduje się w granicach mapy, 
+    # to postać nie może przekroczyć granicy mapy i pozostaje w aktualnej 
+    # pozycji.
+    def check_wall_colisoin(self, dx, dy):
+        if self.check_wall(int(self.x+dx), int(self.y)):
+            self.x+=dx
+        if self.check_wall(int(self.x), int(self.y+dy)):
+            self.y+=dy
 
     def draw(self):
         pg.draw.line(self.game.screen, 'yellow', (self.x * 100, self.y * 100),
