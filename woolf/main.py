@@ -8,7 +8,10 @@ import sys
 from settings import *
 
 # import map from map.py
-from map import * 
+from map import *
+
+# import player from player.py
+from player import * 
 
 #add game class
 class Game:
@@ -35,12 +38,15 @@ class Game:
         # cal new_game
         self.new_game()
 
-    # new game metod, set map
+    # new game metod, set map, add player
     def new_game(self):
         self.map = Map(self)
+        self.player = Player(self)
     
     # metod of screen update, for now cdisplay number of FPS in window caption
     def update(self):
+        # function update from player
+        self.player.update()
 
         # function that refresh object on screen
         pg.display.flip()
@@ -59,8 +65,11 @@ class Game:
         # wypełnij ekran na czarno
         self.screen.fill('black')
 
-        #call draw from map
+        # call draw from map
         self.map.draw()
+
+        #call draw from player
+        self.player.draw()
 
     # metoda do obłsugi zdarzeń
     def check_events(self):
